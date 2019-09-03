@@ -13,6 +13,7 @@ dotmap = "^1.3"
 pytest = "^3.0"
 yapf = "^0.28.0"
 faker = "^2.0"
+pytest-cov = "^2.7"
 
 [build-system]
 requires = ["poetry>=0.12"]
