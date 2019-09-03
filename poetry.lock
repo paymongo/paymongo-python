@@ -40,6 +40,14 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.4.1"
 
 [[package]]
+category = "main"
+description = "ordered, dynamically-expandable dot-access dictionary"
+name = "dotmap"
+optional = false
+python-versions = "*"
+version = "1.3.8"
+
+[[package]]
 category = "dev"
 description = "Faker is a Python package that generates fake data for you."
 name = "faker"
@@ -185,7 +193,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "163a113646225b95998c46df909d994d9cfd689fb369ef63c9b4ab22d2c8b3e7"
+content-hash = "db8a65256453dae8ac160b8addf2a54512ad6e9a440797589ada24388cc64057"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -194,6 +202,7 @@ attrs = ["69c0dbf2ed392de1cb5ec704444b08a5ef81680a61cb899dc08127123af36a79", "f0
 certifi = ["046832c04d4e752f37383b628bc601a7ea7211496b4638f6514d0e5b9acc4939", "945e3ba63a0b9f577b1395204e13c3a231f9bc0223888be653286534e5873695"]
 chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"]
 colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", "f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"]
+dotmap = ["891371a8b037b0dec645ad7a78b4e2740e3529bf596273fda37b77a086a3c72c", "8dd3b4480a75fbd650646515a7371748020d957927b35c09b2f8fc7b98dbae0f"]
 faker = ["1d3f700e8dfcefd6e657118d71405d53e86974448aba78884f119bbd84c0cddf", "d5366e120191c5610fceeebfe1c298dc46da0277096f639c6dd7e2eaee0fa547"]
 idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
 importlib-metadata = ["23d3d873e008a513952355379d93cbcab874c58f4f034ff657c7a87422fa64e8", "80d2de76188eabfbfcf27e6a37342c2827801e59c4cc14b0371c56fed43820e3"]
