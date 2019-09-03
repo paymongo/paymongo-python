@@ -31,3 +31,20 @@ class PaymentService:
         if isinstance(response.json(), dict):
             data = response.json().get('data')
             return Payment(data)
+
+
+    @classmethod
+    def retrieve(cls, id, api_key=None):
+        """
+        You can retrieve a Payment by providing a payment ID.
+        """
+
+        url = api_base + '/v1/payments/' + id
+        response = requests.get(url, auth=(api_key, ''))
+
+        if response.status_code not in [200]:
+            return Payment(response.json())
+
+        if isinstance(response.json(), dict):
+            data = response.json().get('data')
+            return Payment(data)
