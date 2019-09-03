@@ -50,7 +50,7 @@ def test_create_token(data):
     Create a token.
     """
 
-    api_key = os.getenv('API_KEY')
+    api_key = os.getenv('PUBLIC_KEY')
     expected_response = {
         'number': '4242424242424242',
         'exp_month': data['exp_month'],
@@ -89,7 +89,7 @@ def test_create_token(data):
 def test_retrieve_token(data):
     """Retrieve token."""
 
-    api_key = os.getenv('API_KEY')
+    api_key = os.getenv('PUBLIC_KEY')
 
     # Create a token.
     create_token = paymongo.Token.create(data, api_key)
