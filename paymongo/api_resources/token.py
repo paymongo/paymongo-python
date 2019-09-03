@@ -12,7 +12,7 @@ class TokenService:
     """
 
     @classmethod
-    def create(cls, data=None, api_key=None):
+    def create(cls, data, api_key=None):
         """Creates a one-time use token representing your customer's credit card details."""
 
         url = api_base + '/v1/tokens'

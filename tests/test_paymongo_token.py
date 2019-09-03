@@ -7,7 +7,7 @@ fake = faker.Faker()
 
 
 def test_exec_create_token():
-    token = paymongo.Token.create()
+    token = paymongo.Token.create(None)
 
 
 @pytest.fixture
