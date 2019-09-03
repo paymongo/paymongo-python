@@ -1,6 +1,7 @@
-import paymongo
 import faker
 import os
+import paymongo
+import pytest
 
 fake = faker.Faker()
 
@@ -9,19 +10,15 @@ def test_exec_create_token():
     token = paymongo.Token.create()
 
 
-def test_create_token():
-    """
-    Create a token.
-    """
-
-    api_key = os.getenv('API_KEY')
+@pytest.fixture
+def data():
     profile = fake.simple_profile()
     line1 = profile['address'].split('\n')[0]
     line2 = profile['address'].split('\n')[1]
     city = fake.city()
     state = fake.state()
     postal_code = fake.zipcode()
-    country = fake.country
+    country = 'PH'
 
     address = {
         'line1': line1,
@@ -39,36 +36,66 @@ def test_create_token():
         'name': profile['name']
     }
 
-    data = {
+    return {
         'number': '4242424242424242',
         'exp_month': 1,
         'exp_year': 22,
-        'cvc': '201'
+        'cvc': '201',
+        'billing': billing
     }
 
-    expected_response_data = {
+
+def test_create_token(data):
+    """
+    Create a token.
+    """
+
+    api_key = os.getenv('API_KEY')
+    expected_response = {
         'number': '4242424242424242',
         'exp_month': data['exp_month'],
         'exp_year': data['exp_year'],
         'cvc': data['cvc'],
         'billing': {
             'address': {
-                'line1': line1,
-                'line2': line2,
-                'city': city,
-                'state': state,
-                'postal_code': postal_code,
-                'country': country
+                'line1': data['billing']['address']['line1'],
+                'line2': data['billing']['address']['line2'],
+                'city': data['billing']['address']['city'],
+                'state': data['billing']['address']['state'],
+                'postal_code': data['billing']['address']['postal_code'],
+                'country': data['billing']['address']['country']
             },
-            'name': billing['name'],
-            'email': billing['email'],
-            'phone': billing['phone']
+            'name': data['billing']['name'],
+            'email': data['billing']['email'],
+            'phone': data['billing']['phone']
         }
     }
 
     token = paymongo.Token.create(data, api_key)
 
+    # via dictionary index
     assert token is not None
+    token_data_attributes = token.get('attributes')
 
-    assert token.get('data').get('id') is not None
-    assert token.get('data').get('attributes').get('kind') == 'card'
+    assert token.get('id') is not None
+    assert token_data_attributes.get('kind') == 'card'
+
+    # via Dot Notation
+    assert token.id is not None
+    assert token.attributes.billing.name == expected_response['billing'].get(
+        'name')
+
+
+def test_retrieve_token(data):
+    """Retrieve token."""
+
+    api_key = os.getenv('API_KEY')
+
+    # Create a token.
+    create_token = paymongo.Token.create(data, api_key)
+
+    # Retrieve token.
+    retrieve_token = paymongo.Token.retrieve(create_token.id, api_key)
+
+    assert create_token.id == retrieve_token.id
+    assert create_token.attributes.created == retrieve_token.attributes.created
