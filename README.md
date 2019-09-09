@@ -44,3 +44,16 @@ paymongo.Payment.create({
 paymongo.Payment.retrieve(id, api_key)
 
 ```
+
+### Development
+This project uses poetry: a python dependency package tool. [[installation]](https://github.com/sdispater/poetry#installation)
+
+Run the following command to create and/or activate python virtual environment:
+```
+poetry shell
+```
+
+The testsuite uses pytest and pytest-cov. Run test scripts and show code coverage:
+```
+pytest --cov=paymongo
+```
