@@ -27,7 +27,7 @@ Configure individual requests with keyword arguments. Right now this sdk can onl
 ```python
 import paymongo
 
-paymongo.Payment.create({**payment_detail_placeholder}, api_key='sk_test_...')
+paymongo.Payment.create({<payment_details>}, api_key='sk_test_...')
 ```
 
 ### Token
