@@ -2,7 +2,7 @@ import requests
 import paymongo
 
 from dotmap import DotMap
-from paymongo import api_base
+from paymongo import api_base, utils
 
 class Token(DotMap):
     """Token response object."""
@@ -26,13 +26,12 @@ class TokenService:
             }
         }, auth=(api_key, ''))
 
-        if response.status_code not in [200, 201]:
-            # Create and raise paymongo exception
-            return Token(response.json())
-
-        if  isinstance(response.json(), dict):
+        if  isinstance(response.json(), dict) and response.status_code in [200, 201]:
             data = response.json().get('data')
             return Token(data)
+
+        else:
+            utils.handle_exception(response)
 
     @classmethod
     def retrieve(cls, id=None, api_key=None):
@@ -44,10 +43,10 @@ class TokenService:
         url  = api_base + '/v1/tokens/' + id
         response = requests.get(url, auth=(api_key, ''))
 
-        if response.status_code not in [200]:
-            # Create and raise paymongo exception
-            pass
-
-        if  isinstance(response.json(), dict):
+        if  isinstance(response.json(), dict) and response.status_code in [200, 201]:
             data = response.json().get('data')
             return Token(data)
+
+        else:
+            utils.handle_exception(response)
+

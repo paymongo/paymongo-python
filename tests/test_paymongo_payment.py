@@ -57,6 +57,29 @@ def test_create_payment(token):
     assert payment.relationships.source.data == source
 
 
+def test_create_payment_with_invalid_api_key(token):
+    """
+    Create a payment with invalid authentication.
+    """
+
+    # The source will not matter because the request should fail
+    # before validating the request payload.
+    source = {}
+    data = {}
+
+    # with pytest.raises(paymongo.error.AuthenticationError):
+        # payment = paymongo.Payment.create(data)
+
+
+def test_create_payment_with_invalid_request(token):
+    """
+    Create a payment with invalid request.
+    """
+
+    # with pytest.raises(paymongo.error.InvalidRequestError):
+        # paymongo.Payment.create({}, api_key=os.getenv('SECRET_KEY'))
+
+
 def test_retrieve_payment(payment):
     """
     Retrieve a payment by id.
