@@ -1,6 +1,34 @@
 # Paymongo Python SDK
 
 ## Usage
+The library needs to be configured with your account's secret key which is available in your [Paymongo Dashboard](https://dashboard.paymongo.com/developers). Set paymongo.api_key to its value:
+```python
+import paymongo
+paymongo.api_key = 'sk_test_...'
+
+# create payment
+payment = paymongo.Payment.create({
+'amount': 10000,
+  'currency': 'PHP',
+  'description': '',
+  'statement_descriptor': '',
+  'source': {
+    'id': 'tok_...',
+    'type': 'token'
+  }
+})
+
+# retrieve payment
+payment = paymongo.Payment.retrieve('payment_id')
+```
+### Pre-request Configuration
+Configure individual requests with keyword arguments. Right now this sdk can only support keyword argument `api_key`. 
+
+```python
+import paymongo
+
+paymongo.Payment.create({<payment_details>}, api_key='sk_test_...')
+```
 
 ### Token
 ```python
