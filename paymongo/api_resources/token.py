@@ -1,4 +1,5 @@
 import requests
+import paymongo
 
 from dotmap import DotMap
 from paymongo import api_base
@@ -14,6 +15,9 @@ class TokenService:
     @classmethod
     def create(cls, card, api_key=None):
         """Creates a one-time use token representing your customer's credit card details."""
+
+        if not api_key:
+            api_key = paymongo.api_key
 
         url = api_base + '/v1/tokens'
         response = requests.post(url, json={
@@ -33,6 +37,9 @@ class TokenService:
     @classmethod
     def retrieve(cls, id=None, api_key=None):
         """Retrieve a token given an ID."""
+
+        if not api_key:
+            api_key = paymongo.api_key
 
         url  = api_base + '/v1/tokens/' + id
         response = requests.get(url, auth=(api_key, ''))
