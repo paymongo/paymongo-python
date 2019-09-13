@@ -4,7 +4,14 @@ import pytest
 
 
 def test_exec_create_payment():
-    token = paymongo.Payment.create(None)
+    paymongo.api_key = None
+    with pytest.raises(paymongo.error.AuthenticationError):
+        token = paymongo.Payment.create(None)
+
+    paymongo.api_key = os.getenv('SECRET_KEY')
+
+    with pytest.raises(paymongo.error.InvalidRequestError):
+        token = paymongo.Payment.create(None)
 
 
 @pytest.fixture
@@ -68,7 +75,7 @@ def test_create_payment_with_invalid_api_key(token):
     data = {}
 
     # with pytest.raises(paymongo.error.AuthenticationError):
-        # payment = paymongo.Payment.create(data)
+    # payment = paymongo.Payment.create(data)
 
 
 def test_create_payment_with_invalid_request(token):
@@ -77,7 +84,7 @@ def test_create_payment_with_invalid_request(token):
     """
 
     # with pytest.raises(paymongo.error.InvalidRequestError):
-        # paymongo.Payment.create({}, api_key=os.getenv('SECRET_KEY'))
+    # paymongo.Payment.create({}, api_key=os.getenv('SECRET_KEY'))
 
 
 def test_retrieve_payment(payment):

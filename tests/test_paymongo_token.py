@@ -7,7 +7,15 @@ fake = faker.Faker()
 
 
 def test_exec_create_token():
-    token = paymongo.Token.create(None)
+    paymongo.api_key = None
+
+    with pytest.raises(paymongo.error.AuthenticationError):
+        token = paymongo.Token.create(None)
+
+    paymongo.api_key = os.getenv('SECRET_KEY')
+
+    with pytest.raises(paymongo.error.InvalidRequestError):
+        token = paymongo.Token.create(None)
 
 
 @pytest.fixture
