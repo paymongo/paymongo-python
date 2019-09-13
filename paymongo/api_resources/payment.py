@@ -21,6 +21,7 @@ class Payment(Base):
         self.net_amount = attributes.get('net_amount')
         self.statement_descriptor = attributes.get('statement_descriptor')
         self.status = attributes.get('status')
+        self.relationships = data.get('relationship')
 
     def json(self):
         return self.dict
