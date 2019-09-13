@@ -3,9 +3,7 @@ import paymongo
 
 from dotmap import DotMap
 from paymongo import api_base, utils
-
-class Token(DotMap):
-    """Token response object."""
+from .token import Token
 
 class TokenService:
     """
