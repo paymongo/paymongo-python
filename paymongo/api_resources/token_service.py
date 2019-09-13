@@ -1,7 +1,6 @@
 import requests
 import paymongo
 
-from dotmap import DotMap
 from paymongo import api_base, utils
 from .token import Token
 
