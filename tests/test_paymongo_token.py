@@ -83,15 +83,13 @@ def test_create_token(data):
 
     # via dictionary index
     assert token is not None
-    token_data_attributes = token.get('attributes')
+    token_data_attributes = token.json().get('attributes')
 
-    assert token.get('id') is not None
+    assert token.id is not None
     assert token_data_attributes.get('kind') == 'card'
 
     # via Dot Notation
     assert token.id is not None
-    assert token.attributes.billing.name == expected_response['billing'].get(
-        'name')
 
 
 def test_retrieve_token(data):

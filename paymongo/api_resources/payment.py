@@ -1,4 +1,4 @@
-from .common import Attribute, Base
+from .common import Base, Billing
 
 
 class Payout(Base):
@@ -25,6 +25,26 @@ class Relationship(Base):
             self.source = Source(source.get('data'))
 
 
+
+class PaymentAttribute(Base):
+    def __init__(self, data):
+        self.amount = data.get('amount')
+
+        if data.get('billing'):
+            self.billing = Billing(data.get('billing'))
+
+        self.currency = data.get('currency')
+        self.description = data.get('description')
+        self.external_reference_number = data.get(
+            'external_reference_number')
+        self.fee = data.get('fee')
+        self.livemode = data.get('livemode')
+        self.net_amount = data.get('net_amount')
+        self.statement_descriptor = data.get('statement_descriptor')
+        self.status = data.get('status')
+
+
+
 class Payment(Base):
     def __init__(self, data):
         self._dict = data
@@ -33,7 +53,7 @@ class Payment(Base):
         self.type = data['type']
         attributes = data['attributes']
 
-        self.attributes = Attribute(attributes)
+        self.attributes = PaymentAttribute(attributes)
 
         self.amount = attributes.get('amount')
         self.currency = attributes.get('currency')
