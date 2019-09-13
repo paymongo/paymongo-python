@@ -61,7 +61,8 @@ def test_create_payment(token):
     assert payment.id is not None
     assert payment.attributes.amount == data['amount']
     assert payment.attributes.fee is not None
-    assert payment.relationships.source.data == source
+    assert payment.relationships.source.id == source.get('id')
+    assert payment.relationships.source.type == source.get('type')
 
 
 def test_create_payment_with_invalid_api_key(token):
@@ -69,22 +70,24 @@ def test_create_payment_with_invalid_api_key(token):
     Create a payment with invalid authentication.
     """
 
+    paymongo.api_key = None
     # The source will not matter because the request should fail
     # before validating the request payload.
     source = {}
     data = {}
 
-    # with pytest.raises(paymongo.error.AuthenticationError):
-    # payment = paymongo.Payment.create(data)
+    with pytest.raises(paymongo.error.AuthenticationError):
+        payment = paymongo.Payment.create(data)
 
 
 def test_create_payment_with_invalid_request(token):
     """
     Create a payment with invalid request.
     """
+    paymongo.api_key = os.getenv('SECRET_KEY')
 
-    # with pytest.raises(paymongo.error.InvalidRequestError):
-    # paymongo.Payment.create({}, api_key=os.getenv('SECRET_KEY'))
+    with pytest.raises(paymongo.error.InvalidRequestError):
+        paymongo.Payment.create({}, api_key=os.getenv('SECRET_KEY'))
 
 
 def test_retrieve_payment(payment):
@@ -98,4 +101,4 @@ def test_retrieve_payment(payment):
     assert retrieved_payment.id == payment.id
     assert retrieved_payment.attributes.amount == payment.attributes.amount
     assert retrieved_payment.attributes.fee is not None
-    assert retrieved_payment.relationships.source == payment.relationships.source
+    assert retrieved_payment.relationships.source.id == payment.relationships.source.id

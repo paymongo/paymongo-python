@@ -1,6 +1,30 @@
 from .common import Attribute, Base
 
 
+class Payout(Base):
+    def __init__(self, data):
+        self.id = data.get('id')
+        self.type = data.get('type')
+
+
+class Source(Base):
+    def __init__(self, data):
+        self.id = data.get('id')
+        self.type = data.get('type')
+
+
+class Relationship(Base):
+    def __init__(self, data):
+        payout = data.get('payout')
+        source = data.get('source')
+
+        if payout.get('data'):
+            self.payout = Payout(payout.get('data'))
+
+        if source.get('data'):
+            self.source = Source(source.get('data'))
+
+
 class Payment(Base):
     def __init__(self, data):
         self._dict = data
@@ -21,7 +45,8 @@ class Payment(Base):
         self.net_amount = attributes.get('net_amount')
         self.statement_descriptor = attributes.get('statement_descriptor')
         self.status = attributes.get('status')
-        self.relationships = data.get('relationship')
+
+        self.relationships = Relationship(data.get('relationships'))
 
     def json(self):
         return self.dict
