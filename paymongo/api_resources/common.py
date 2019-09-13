@@ -1,11 +1,14 @@
 class Base:
     def __str__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
+        return self._get_object_attributes()
 
     def __repr__(self):
+        return self._get_object_attributes()
+
+    def _get_object_attributes(self):
         attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
+        attributes = ', '.join("%s=%s" % item for item in attrs.items() if not item[0].startswith('_'))
+        return '{object}({attributes})'.format(object=self.__class__.__name__, attributes=attributes)
 
 
 class Address(Base):

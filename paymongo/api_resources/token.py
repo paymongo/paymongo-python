@@ -37,3 +37,6 @@ class Token(Base):
         self.livemode = attributes.get('livemode')
         self.updated = data.get('updated')
         self.used = data.get('used')
+
+    def json(self):
+        return self._dict
