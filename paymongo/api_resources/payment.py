@@ -1,7 +1,7 @@
-from .common import Attribute, Billing, Address
+from .common import Attribute, Base
 
 
-class Payment:
+class Payment(Base):
     def __init__(self, data):
         self._dict = data
 
@@ -24,11 +24,3 @@ class Payment:
 
     def json(self):
         return self.dict
-
-    def __str__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
-
-    def __repr__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())

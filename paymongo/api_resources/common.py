@@ -1,4 +1,14 @@
-class Address:
+class Base:
+    def __str__(self):
+        attrs = vars(self)
+        return ', '.join("%s: %s" % item for item in attrs.items())
+
+    def __repr__(self):
+        attrs = vars(self)
+        return ', '.join("%s: %s" % item for item in attrs.items())
+
+
+class Address(Base):
     def __init__(self, data):
         if data:
             self.city = data.get('city')
@@ -8,16 +18,8 @@ class Address:
             self.postal_code = data.get('postal_code')
             self.state = data.get('state')
 
-    def __str__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
 
-    def __repr__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
-
-
-class Billing:
+class Billing(Base):
     def __init__(self, data):
         if data:
             self.address = Address(data.get('address'))
@@ -25,16 +27,8 @@ class Billing:
             self.email = data.get('email')
             self.phone = data.get('phone')
 
-    def __str__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
 
-    def __repr__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
-
-
-class Attribute:
+class Attribute(Base):
     def __init__(self, data):
         if data:
             self.amount = data.get('amount')
@@ -48,11 +42,3 @@ class Attribute:
             self.net_amount = data.get('net_amount')
             self.statement_descriptor = data.get('statement_descriptor')
             self.status = data.get('status')
-
-    def __str__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
-
-    def __repr__(self):
-        attrs = vars(self)
-        return ', '.join("%s: %s" % item for item in attrs.items())
