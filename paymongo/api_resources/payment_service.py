@@ -3,10 +3,7 @@ import paymongo
 
 from dotmap import DotMap
 from paymongo import api_base, utils
-
-
-class Payment(DotMap):
-    """Payment response object."""
+from .payment import Payment
 
 
 class PaymentService:
