@@ -73,6 +73,24 @@ paymongo.Payment.retrieve(id, api_key)
 
 ```
 
+### Accessing Attributes
+Payment and Token object attributes can be access by:
+```
+payment = paymongo.Payment.create(...)
+
+# via top-level attribute
+$ payment.amount
+> 10000
+
+# via `attributes` attribute
+$ payment.attributes.amount
+> 10000
+
+# via dictionary / json
+$ payment = payment.json()
+$ payment.get('attributes').get('amount')
+```
+
 ### Development
 This project uses poetry: a python dependency package tool. [[installation]](https://github.com/sdispater/poetry#installation)
 
