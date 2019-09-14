@@ -1,42 +1,50 @@
-from .common import Base
+import requests
+import paymongo
 
-class Card(Base):
-    def __init__(self, data):
-        self.address_city = data.get('address_city')
-        self.address_country = data.get('address_country')
-        self.address_line1 = data.get('address_line1')
-        self.address_line2 = data.get('address_line2')
-        self.address_zip = data.get('address_zip')
-        self.brand = data.get('brand')
-        self.country = data.get('country')
-        self.exp_year = data.get('exp_year')
-        self.last4 = data.get('last4')
+from paymongo import api_base, utils
+from paymongo.common import Token
 
-class TokenAttribute(Base):
-    def __init__(self, data):
-        self.card = Card(data.get('card'))
-        self.created = data.get('created')
-        self.kind = data.get('kind')
-        self.livemode = data.get('livemode')
-        self.updated = data.get('updated')
-        self.used = data.get('used')
 
-class Token(Base):
-    def __init__(self, data):
-        self._dict = data
+class TokenService:
+    """
+    The token object represents a payment source, e.g. your customer's credit cards.
+    """
+    @classmethod
+    def create(cls, card, api_key=None):
+        """Creates a one-time use token representing your customer's credit card details."""
 
-        self.id = data['id']
-        self.type = data['type']
-        attributes = data['attributes']
+        if not api_key:
+            api_key = paymongo.api_key
 
-        self.attributes = TokenAttribute(attributes)
+        url = api_base + '/v1/tokens'
+        response = requests.post(url,
+                                 json={'data': {
+                                     'attributes': card
+                                 }},
+                                 auth=(api_key, ''))
 
-        self.card = Card(attributes.get('card'))
-        self.created = attributes.get('created')
-        self.kind = attributes.get('kind')
-        self.livemode = attributes.get('livemode')
-        self.updated = data.get('updated')
-        self.used = data.get('used')
+        if isinstance(response.json(),
+                      dict) and response.status_code in [200, 201]:
+            data = response.json().get('data')
+            return Token(data)
 
-    def json(self):
-        return self._dict
+        else:
+            utils.handle_exception(response)
+
+    @classmethod
+    def retrieve(cls, id=None, api_key=None):
+        """Retrieve a token given an ID."""
+
+        if not api_key:
+            api_key = paymongo.api_key
+
+        url = api_base + '/v1/tokens/' + id
+        response = requests.get(url, auth=(api_key, ''))
+
+        if isinstance(response.json(),
+                      dict) and response.status_code in [200, 201]:
+            data = response.json().get('data')
+            return Token(data)
+
+        else:
+            utils.handle_exception(response)

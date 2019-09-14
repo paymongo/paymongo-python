@@ -7,8 +7,10 @@ class Base:
 
     def _get_object_attributes(self):
         attrs = vars(self)
-        attributes = ', '.join("%s=%s" % item for item in attrs.items() if not item[0].startswith('_'))
-        return '{object}({attributes})'.format(object=self.__class__.__name__, attributes=attributes)
+        attributes = ', '.join("%s=%s" % item for item in attrs.items()
+                               if not item[0].startswith('_'))
+        return '{object}({attributes})'.format(object=self.__class__.__name__,
+                                               attributes=attributes)
 
 
 class Address(Base):
@@ -30,5 +32,3 @@ class Billing(Base):
         self.name = data.get('name')
         self.email = data.get('email')
         self.phone = data.get('phone')
-
-
