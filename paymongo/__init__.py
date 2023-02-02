@@ -11,8 +11,3 @@ from paymongo.api_resources.services.payment_intent import PaymentIntent
 
 api_key = None
 
-def payment_intent():
-  if api_key == None:
-    raise StandardException('API key is required.')
-
-  return PaymentIntent(config=PaymongoConfig(api_key))

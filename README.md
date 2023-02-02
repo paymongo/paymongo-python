@@ -61,10 +61,10 @@ import paymongo
 paymongo.api_key='sk_test...'
 
 # retrieve payment intent
-paymongo.payment_intent().retrieve('pi_...')
+paymongo.PaymentIntent.retrieve('pi_...')
 
 # create payment intent
-payment_intent = paymongo.payment_intent().create({
+payment_intent = paymongo.PaymentIntent.create({
   'amount': 10000,
   'currency': 'PHP',
   'description': 'Dog Treat',

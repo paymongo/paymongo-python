@@ -3,9 +3,10 @@ from paymongo import BaseService
 class PaymentIntent(BaseService):
   URI = 'payment_intents'
 
-  def __init__(self, config):
-    BaseService.__init__(self, config=config)
+  def __init__(self):
+    BaseService.__init__(self)
 
+  @classmethod
   def create(self, payload):
     return self.request(
       method='post',
@@ -14,6 +15,7 @@ class PaymentIntent(BaseService):
       payload=payload
     )
 
+  @classmethod
   def retrieve(self, id):
     return self.request(
       method='get',
