@@ -1,4 +1,5 @@
 from paymongo import BaseService
+from paymongo import PaymentIntentEntity;
 
 class PaymentIntent(BaseService):
   URI = 'payment_intents'
@@ -9,8 +10,8 @@ class PaymentIntent(BaseService):
   @classmethod
   def create(self, payload):
     return self.request(
+      entity=PaymentIntentEntity,
       method='post',
-      object='payment_intent_entity',
       path=self.URI,
       payload=payload
     )
@@ -18,7 +19,7 @@ class PaymentIntent(BaseService):
   @classmethod
   def retrieve(self, id):
     return self.request(
+      entity=PaymentIntentEntity,
       method='get',
-      object='payment_intent_entity',
       path=f'{self.URI}/{id}'
     )

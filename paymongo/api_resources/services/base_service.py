@@ -1,10 +1,9 @@
 import paymongo
 from paymongo import PaymongoConfig
 from paymongo import PaymongoClient
-from paymongo import PaymentIntentEntity
 from paymongo import StandardException
 
-class BaseService(object):
+class BaseService():
   def __init__(self) -> None:
     pass
 
@@ -14,7 +13,7 @@ class BaseService(object):
 
     return PaymongoConfig(paymongo.api_key)
 
-  def request(method, object, path, payload={}):
+  def request(method, entity, path, payload={}):
     response = PaymongoClient.execute_request(
       config=BaseService.config(),
       method=method,
@@ -22,11 +21,4 @@ class BaseService(object):
       path=path
     )
 
-    return BaseService.toEntity(object, response)
-
-  def toEntity(object, response):
-    entities = {
-      'payment_intent_entity' : PaymentIntentEntity(resource=response)
-    }
-
-    return entities[object]
+    return entity(resource=response)
