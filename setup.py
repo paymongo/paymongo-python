@@ -12,7 +12,7 @@ setup(
   author='PayMongo',
   author_email='support@paymongo.com',
   classifiers=classifiers,
-  description='Paymongo Python Library',
+  description='PayMongo Python Library',
   install_requires=[
     'requests'
   ],
