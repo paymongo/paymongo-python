@@ -26,7 +26,6 @@ class PaymongoClient:
 
     return content['errors'][0]['detail']
 
-
   def get_response(config, method, params, uri):
     headers = {
       'Authorization' : f'Basic {config.api_key}',

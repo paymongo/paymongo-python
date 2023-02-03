@@ -9,7 +9,7 @@ classifiers = [
 ]
 
 setup(
-  author='Paymongo',
+  author='PayMongo',
   author_email='support@paymongo.com',
   classifiers=classifiers,
   description='Paymongo Python Library',
@@ -21,6 +21,6 @@ setup(
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.md').read(),
   name='paymongo',
   packages=find_packages(),
-  version='0.0.0',
+  version='0.1.0',
   url=''
 )
