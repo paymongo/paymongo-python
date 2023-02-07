@@ -10,7 +10,7 @@ class Payment(BaseService):
   @classmethod
   def retrieve(self, id):
     return self.request(
-      method='get',
       entity=PaymentEntity,
+      method='get',
       path=f'{self.URI}/{id}'
     )
