@@ -129,25 +129,25 @@ paymongo.Refund.create({
 paymongo.Customer.retrieve('cus_...')
 
 paymongo.Customer.create({
+  'default_device': 'phone',
+  'email': 'test@paymongo.com',
   'first_name': 'Pay',
   'last_name': 'Mongo',
-  'phone': '+639150000001',
-  'email': 'test@paymongo.com',
-  'default_device': 'phone',
   'metadata': {
     '1': '1'
-  }
+  },
+  'phone': '+639150000001'
 })
 
 paymongo.Customer.update('cus_...', {
+  'default_device': 'phone',
+  'email': 'test2@paymongo.com',
   'first_name': 'Pay',
   'last_name': 'Mongo',
-  'phone': '+639150000002',
-  'email': 'test2@paymongo.com',
-  'default_device': 'phone',
   'metadata': {
     '1': '1'
-  }
+  },
+  'phone': '+639150000002'
 })
 
 paymongo.Customer.delete('cus_...')
