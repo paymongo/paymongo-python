@@ -121,7 +121,11 @@ paymongo.Refund.create({
     'merchant': 'test value'
   }
 })
+```
 
+## Customers
+
+```python
 # retrieve customer
 paymongo.Customer.retrieve('cus_...')
 
