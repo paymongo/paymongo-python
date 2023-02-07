@@ -33,12 +33,19 @@ class PaymongoClient:
       'Content-Type': 'application/json',
     }
 
-    if(method == 'get'):
+    if(method == 'delete'):
+      response = requests.delete(headers=headers, url=uri)
+
+    elif(method == 'get'):
       response = requests.get(headers=headers, params=params, url=uri)
 
     elif(method == 'post'):
       modified_params = { 'data' : { 'attributes' : params } }
       response = requests.post(data=json.dumps(modified_params), headers=headers, url=uri)
+
+    elif(method == 'put'):
+      modified_params = { 'data' : { 'attributes' : params } }
+      response = requests.put(data=json.dumps(modified_params), headers=headers, url=uri)
 
     return response
 
