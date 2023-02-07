@@ -1,6 +1,7 @@
 import json
 import requests
 from ast import literal_eval
+from paymongo import ApiResource
 from paymongo import StandardException
 
 class PaymongoClient:
@@ -17,7 +18,7 @@ class PaymongoClient:
     if not PaymongoClient.is_successful(response):
       raise StandardException(PaymongoClient.get_error_detail(response=response))
 
-    return response.json()
+    return ApiResource(response.json())
 
   def get_error_detail(response):
     response_content = response._content
@@ -33,7 +34,7 @@ class PaymongoClient:
     }
 
     if(method == 'get'):
-      response = requests.get(headers=headers, url=uri)
+      response = requests.get(headers=headers, params=params, url=uri)
 
     elif(method == 'post'):
       modified_params = { 'data' : { 'attributes' : params } }
