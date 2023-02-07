@@ -126,10 +126,8 @@ paymongo.Refund.create({
 ## Customers
 
 ```python
-# retrieve customer
 paymongo.Customer.retrieve('cus_...')
 
-# create customer
 paymongo.Customer.create({
   'first_name': 'Pay',
   'last_name': 'Mongo',
@@ -141,7 +139,6 @@ paymongo.Customer.create({
   }
 })
 
-# update customer
 paymongo.Customer.update('cus_...', {
   'first_name': 'Pay',
   'last_name': 'Mongo',
@@ -153,7 +150,6 @@ paymongo.Customer.update('cus_...', {
   }
 })
 
-# delete customer
 paymongo.Customer.delete('cus_...')
 ```
 
