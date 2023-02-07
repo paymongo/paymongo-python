@@ -60,6 +60,9 @@ import paymongo
 # set api key config
 paymongo.api_key='sk_test...'
 
+# retrieve payment
+paymongo::Payment.retrieve('pay_...')
+
 # retrieve payment intent
 paymongo.PaymentIntent.retrieve('pi_...')
 
