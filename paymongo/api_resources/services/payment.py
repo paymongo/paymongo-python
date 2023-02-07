@@ -4,8 +4,8 @@ from paymongo import PaymentEntity;
 class Payment(BaseService):
   URI = 'payments'
 
-  def __init__(self, config):
-    BaseService.__init__(self, config=config)
+  def __init__(self):
+    BaseService.__init__(self)
 
   @classmethod
   def retrieve(self, id):

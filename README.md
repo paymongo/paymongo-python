@@ -60,9 +60,6 @@ import paymongo
 # set api key config
 paymongo.api_key='sk_test...'
 
-# retrieve payment
-paymongo::Payment.retrieve('pay_...')
-
 # retrieve payment intent
 paymongo.PaymentIntent.retrieve('pi_...')
 
@@ -112,6 +109,9 @@ paymongo.PaymentMethod.create({
     'phone': '09176318683'
   }
 })
+
+ # Payment
+paymongo::Payment.retrieve('pay_...')
 
 # Refund
 paymongo.Refund.retrieve('ref_...')
