@@ -79,9 +79,36 @@ payment_intent = paymongo.PaymentIntent.create({
 payment_intent.id
  => "pi_..."
 
- # retrieve payment intent status attribute
+# retrieve payment intent status attribute
 payment_intent.status
  => "awaiting_payment_method"
+
+# create payment intent
+payment_method = paymongo.PaymentMethod.create({
+ 'type': 'card',
+  'details': {
+    'card_number': '5111111111111118',
+    'exp_month': 3,
+    'exp_year': 2025,
+    'cvc': '123'
+  },
+  'billing': {
+    'address': {
+      'line1': 'test line2',
+      'line2': 'test line 1',
+      'city': 'Antipolo',
+      'state': 'Rizal',
+      'postal_code': '1870',
+      'country': 'PH'
+    },
+    'email': 'juan@gmail.comm',
+    'name': 'Juan dela cruz',
+    'phone': '09176318683'
+  }
+})
+
+# retrieve payment method
+paymongo.PaymentMethod.retrieve('pm_...')
 
 # Refund
 paymongo.Refund.retrieve('ref_...')
