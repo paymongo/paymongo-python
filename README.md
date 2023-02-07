@@ -83,8 +83,8 @@ payment_intent.id
 payment_intent.status
  => "awaiting_payment_method"
 
-# create payment intent
-payment_method = paymongo.PaymentMethod.create({
+# create payment method
+paymongo.PaymentMethod.create({
  'type': 'card',
   'details': {
     'card_number': '5111111111111118',
