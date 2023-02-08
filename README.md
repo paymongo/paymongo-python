@@ -82,6 +82,18 @@ payment_intent.id
  # retrieve payment intent status attribute
 payment_intent.status
  => "awaiting_payment_method"
+
+# Refund
+paymongo.Refund.retrieve('ref_...')
+
+paymongo.Refund.create({
+  'amount': 10000,
+  'payment_id': 'pay_...',
+  'reason': 'requested_by_customer',
+  'metadata': {
+    'merchant': 'test value'
+  }
+})
 ```
 
 ## Links
