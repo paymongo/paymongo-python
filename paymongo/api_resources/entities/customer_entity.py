@@ -1,13 +1,12 @@
 from paymongo import BaseEntity
 
 class CustomerEntity(BaseEntity):
-  def __init__(self, resource):
+  def __init__(self, api_resource):
     BaseEntity.__init__(self)
 
-    data = resource['data']
-    attributes = data['attributes']
+    attributes = api_resource.attributes
 
-    self.id = data['id']
+    self.id = api_resource.id
     self.default_device = self.get_value(attributes, 'default_device')
     self.default_payment_method_id = self.get_value(attributes, 'default_payment_method_id')
     self.deleted = self.get_value(attributes, 'deleted')
