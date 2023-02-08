@@ -83,3 +83,21 @@ payment_intent.id
 payment_intent.status
  => "awaiting_payment_method"
 ```
+
+## Links
+
+```python
+paymongo.Link.retrieve('link_...')
+
+paymongo.Link.archive('link_...')
+
+paymongo.Link.unarchive('link_...')
+
+paymongo.Link.create({
+  'amount': 10000,
+  'description': 'link description',
+  'remarks': 'link remarks'
+})
+
+links = paymongo.Link.all({'reference_number': '1234abc'})
+```
