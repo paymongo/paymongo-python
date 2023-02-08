@@ -88,7 +88,7 @@ paymongo.PaymentMethod.retrieve('pm_...')
 
 # create payment method
 paymongo.PaymentMethod.create({
- 'type': 'card',
+  'type': 'card',
   'details': {
     'card_number': '5111111111111118',
     'exp_month': 3,
