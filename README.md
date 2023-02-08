@@ -83,6 +83,9 @@ payment_intent.id
 payment_intent.status
  => "awaiting_payment_method"
 
+# retrieve payment method
+paymongo.PaymentMethod.retrieve('pm_...')
+
 # create payment method
 paymongo.PaymentMethod.create({
  'type': 'card',
