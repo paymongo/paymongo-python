@@ -144,9 +144,6 @@ paymongo.Customer.update('cus_...', {
   'email': 'test2@paymongo.com',
   'first_name': 'Pay',
   'last_name': 'Mongo',
-  'metadata': {
-    '1': '1'
-  },
   'phone': '+639150000002'
 })
 
