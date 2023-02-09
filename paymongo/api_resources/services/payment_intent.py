@@ -8,7 +8,7 @@ class PaymentIntent(BaseService):
     BaseService.__init__(self)
 
   @classmethod
-  def attach(self, id, payload={}):
+  def attach(self, id, payload):
     return self.request(
       entity=PaymentIntentEntity,
       method='post',

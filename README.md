@@ -103,8 +103,7 @@ payment_intent = paymongo.PaymentIntent.create({
   'payment_method_allowed': [
     'card'
   ],
-  'statement_descriptor': 'BarkerShop',
-  'currency': 'PHP'
+  'statement_descriptor': 'BarkerShop'
 })
 
 paymongo.PaymentIntent.attach('pi_...', {
