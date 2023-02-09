@@ -174,18 +174,17 @@ links = paymongo.Link.all({'reference_number': '1234abc'})
 paymongo.Webhook.retrieve('hook_...')
 
 paymongo.Webhook.create({
-  'events':  ['payment.refunded', 'payment.refund.updated'],
-  'url':  'http://localhost:3100/webhook'
+  'events': ['payment.refunded', 'payment.refund.updated'],
+  'url': 'http://localhost:3100/webhook'
 })
 
 paymongo.Webhook.disable('hook_...')
 
 paymongo.Webhook.enable('hook_...')
 
-paymongo.Webhook.update('hook_...',
-{
+paymongo.Webhook.update('hook_...', {
    'events': ['payment.refunded', 'payment.refund.updated'],
-   'url':  'http://localhost:3001/webhook'
+   'url': 'http://localhost:3001/webhook'
 })
 
 webhooks = paymongo.Webhook.all()
