@@ -60,33 +60,16 @@ import paymongo
 # set api key config
 paymongo.api_key='sk_test...'
 
-# retrieve payment intent
-paymongo.PaymentIntent.retrieve('pi_...')
+# Payment Method
+payment_method = paymongo.PaymentMethod.retrieve('pm_...')
 
-# create payment intent
-payment_intent = paymongo.PaymentIntent.create({
-  'amount': 10000,
-  'currency': 'PHP',
-  'description': 'Dog Treat',
-  'payment_method_allowed': [
-    'card'
-  ],
-  'statement_descriptor': 'BarkerShop',
-  'currency': 'PHP'
-})
+# Retrieve attributes
+payment_method.id
+ => "pm_..."
 
-# retrieve payment intent id attribute
-payment_intent.id
- => "pi_..."
+payment_method.type
+ => "card"
 
-# retrieve payment intent status attribute
-payment_intent.status
- => "awaiting_payment_method"
-
-# retrieve payment method
-paymongo.PaymentMethod.retrieve('pm_...')
-
-# create payment method
 paymongo.PaymentMethod.create({
   'type': 'card',
   'details': {
@@ -110,7 +93,32 @@ paymongo.PaymentMethod.create({
   }
 })
 
- # Payment
+# Payment Intent
+paymongo.PaymentIntent.retrieve('pi_...')
+
+payment_intent = paymongo.PaymentIntent.create({
+  'amount': 10000,
+  'currency': 'PHP',
+  'description': 'Dog Treat',
+  'payment_method_allowed': [
+    'card'
+  ],
+  'statement_descriptor': 'BarkerShop',
+  'currency': 'PHP'
+})
+
+paymongo.PaymentIntent.attach('pi_...', {
+  'payment_method': 'pm_...',
+  'return_url': 'https://test/success'
+})
+
+paymongo.PaymentIntent.cancel('pi_...')
+
+paymongo.PaymentIntent.capture('pi_...', {
+  'amount':10000
+})
+
+# Payment
 paymongo.Payment.retrieve('pay_...')
 
 # Refund
