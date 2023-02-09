@@ -110,9 +110,6 @@ paymongo.PaymentMethod.create({
   }
 })
 
-# retrieve payment method
-paymongo.PaymentMethod.retrieve('pm_...')
-
 # Refund
 paymongo.Refund.retrieve('ref_...')
 
@@ -124,6 +121,33 @@ paymongo.Refund.create({
     'merchant': 'test value'
   }
 })
+```
+
+## Customers
+
+```python
+paymongo.Customer.retrieve('cus_...')
+
+paymongo.Customer.create({
+  'default_device': 'phone',
+  'email': 'test@paymongo.com',
+  'first_name': 'Pay',
+  'last_name': 'Mongo',
+  'metadata': {
+    '1': '1'
+  },
+  'phone': '+639150000001'
+})
+
+paymongo.Customer.update('cus_...', {
+  'default_device': 'phone',
+  'email': 'test2@paymongo.com',
+  'first_name': 'Pay',
+  'last_name': 'Mongo',
+  'phone': '+639150000002'
+})
+
+paymongo.Customer.delete('cus_...')
 ```
 
 ## Links
