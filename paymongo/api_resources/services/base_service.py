@@ -10,9 +10,6 @@ class BaseService():
     pass
 
   def config():
-    if paymongo.api_key == None:
-      raise StandardException('API key is required.')
-
     return PaymongoConfig(paymongo.api_key)
 
   def request(method, entity, path, payload={}, is_listing=False):

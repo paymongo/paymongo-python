@@ -2,7 +2,7 @@ import base64
 
 class PaymongoConfig:
   def __init__(self, api_key):
-    self.api_key = PaymongoConfig.encode_api_key(api_key)
+    self.api_key = PaymongoConfig.encode_api_key(api_key) if isinstance(api_key, str) else None
     self.api_base_url = 'https://api.paymongo.com'
     self.api_version = 'v1'
 
