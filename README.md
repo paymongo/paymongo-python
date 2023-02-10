@@ -110,6 +110,9 @@ paymongo.PaymentMethod.create({
   }
 })
 
+ # Payment
+paymongo.Payment.retrieve('pay_...')
+
 # Refund
 paymongo.Refund.retrieve('ref_...')
 
