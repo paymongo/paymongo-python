@@ -8,6 +8,32 @@ class PaymentIntent(BaseService):
     BaseService.__init__(self)
 
   @classmethod
+  def attach(self, id, payload):
+    return self.request(
+      entity=PaymentIntentEntity,
+      method='post',
+      path=f'{self.URI}/{id}/attach',
+      payload=payload
+    )
+
+  @classmethod
+  def cancel(self, id):
+    return self.request(
+      entity=PaymentIntentEntity,
+      method='post',
+      path=f'{self.URI}/{id}/cancel'
+    )
+
+  @classmethod
+  def capture(self, id, payload):
+    return self.request(
+      entity=PaymentIntentEntity,
+      method='post',
+      path=f'{self.URI}/{id}/capture',
+      payload=payload
+    )
+
+  @classmethod
   def create(self, payload):
     return self.request(
       entity=PaymentIntentEntity,
