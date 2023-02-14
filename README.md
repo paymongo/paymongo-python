@@ -199,3 +199,14 @@ paymongo.Webhook.update('hook_...', {
 
 webhooks = paymongo.Webhook.all()
 ```
+
+## Error handling
+
+```python
+try:
+  payment_intent = paymongo.PaymentIntent.retrieve('pi_...')
+except paymongo.StandardException as e:
+  # Handle error
+  print(e.errors[0].detail)
+  print(e.errors[0].code)
+```
