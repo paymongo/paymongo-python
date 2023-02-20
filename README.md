@@ -218,13 +218,16 @@ payload = '{"data":{"id":"evt_...","type":"event","attributes":{"type":"source.c
 signature_header = 't=1675323267,te=,li=99f...'
 webhook_secret_key = 'whsk_...'
 
-event = paymongo.Webhook.construct_event(
-  payload=payload,
-  signature_header=signature_header,
-  webhook_secret_key=webhook_secret_key
-)
+try:
+  event = paymongo.Webhook.construct_event(
+    payload=payload,
+    signature_header=signature_header,
+    webhook_secret_key=webhook_secret_key
+  )
 
-event.id
-event.type
-event.resource
+  event.id
+  event.type
+  event.resource
+except paymongo.Errors.SignatureVerificationError:
+  # Handle invalid signature
 ```
