@@ -194,7 +194,7 @@ paymongo.Webhook.update('hook_...', {
 webhooks = paymongo.Webhook.all()
 ```
 
-## Error handling
+## Handle errors
 
 ```python
 try:
