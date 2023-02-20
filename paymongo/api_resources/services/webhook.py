@@ -1,5 +1,12 @@
+import hashlib
+import hmac
+import json
+
+from paymongo import ApiResource
 from paymongo import BaseService
-from paymongo import WebhookEntity;
+from paymongo import EventEntity
+from paymongo import StandardException
+from paymongo import WebhookEntity
 
 class Webhook(BaseService):
   URI = 'webhooks'
@@ -15,6 +22,39 @@ class Webhook(BaseService):
       path=self.URI,
       is_listing=True
     )
+
+  @classmethod
+  def construct_event(all, payload, signature_header, webhook_secret_key):
+    if not type(signature_header) == str:
+      raise StandardException('The signature must be a string.')
+
+    signature_array = signature_header.split(',')
+
+    if len(signature_array) < 3:
+      raise StandardException(f'The format of signature {signature_header} is invalid.')
+
+    timestamp = signature_array[0].split('=')[1]
+    test_mode_signature = signature_array[1].split('=')[1]
+    live_mode_signature = signature_array[2].split('=')[1]
+
+    if test_mode_signature is not None:
+      comparison_signature = test_mode_signature
+
+    if live_mode_signature is not None:
+      comparison_signature = live_mode_signature
+
+    hash = hmac.new(
+      bytes(webhook_secret_key, 'utf-8'),
+      bytes(f'{timestamp}.{payload}', 'utf-8'),
+      hashlib.sha256
+    ).hexdigest()
+
+    if hash != comparison_signature:
+      raise StandardException('The signature is invalid.')
+
+    api_source = ApiResource(response=json.loads(payload))
+
+    return EventEntity(api_resource=api_source)
 
   @classmethod
   def create(self, payload):
