@@ -228,6 +228,6 @@ try:
   event.id
   event.type
   event.resource
-except paymongo.Errors.SignatureVerificationError:
+except paymongo.SignatureVerificationException:
   # Handle invalid signature
 ```
