@@ -1,8 +1,6 @@
-# paymongo-python
-
 # PayMongo Python Library
 
-PayMongo python library provides python applications an easy access to the PayMongo API. Explore various classes that can represent API resources on object instantiation. The goal of this library is simplify PayMongo integration with any python application.
+PayMongo Python library provides python applications an easy access to the PayMongo API. Explore various classes that can represent API resources on object instantiation. The goal of this library is simplify PayMongo integration with any python application.
 
 ## Pending TODOs
 
@@ -11,7 +9,6 @@ PayMongo python library provides python applications an easy access to the PayMo
 ## Documentation
 
 See the [PayMongo API docs](https://developers.paymongo.com/reference/getting-started-with-your-api).
-
 
 ### Requirements
 
@@ -57,7 +54,7 @@ value:
 ```python
 import paymongo
 
-# set api key config
+# Set api key config
 paymongo.api_key='sk_test...'
 
 # Payment Method
@@ -74,22 +71,22 @@ paymongo.PaymentMethod.create({
   'type': 'card',
   'details': {
     'card_number': '5111111111111118',
+    'cvc': '123',
     'exp_month': 3,
     'exp_year': 2025,
-    'cvc': '123'
   },
   'billing': {
     'address': {
-      'line1': 'test line2',
-      'line2': 'test line 1',
+      'line1': 'test line 1',
+      'line2': 'test line 2',
       'city': 'Antipolo',
       'state': 'Rizal',
       'postal_code': '1870',
       'country': 'PH'
     },
-    'email': 'juan@gmail.comm',
-    'name': 'Juan dela cruz',
-    'phone': '09176318683'
+    'email': 'test@paymongo.com',
+    'name': 'Pay Mongo',
+    'phone': '09123456789'
   }
 })
 
@@ -143,18 +140,15 @@ paymongo.Customer.create({
   'email': 'test@paymongo.com',
   'first_name': 'Pay',
   'last_name': 'Mongo',
-  'metadata': {
-    '1': '1'
-  },
-  'phone': '+639150000001'
+  'phone': '+624123456789'
 })
 
 paymongo.Customer.update('cus_...', {
   'default_device': 'phone',
-  'email': 'test2@paymongo.com',
+  'email': 'test@paymongo.com',
   'first_name': 'Pay',
   'last_name': 'Mongo',
-  'phone': '+639150000002'
+  'phone': '+649223456789'
 })
 
 paymongo.Customer.delete('cus_...')
@@ -200,7 +194,7 @@ paymongo.Webhook.update('hook_...', {
 webhooks = paymongo.Webhook.all()
 ```
 
-## Error handling
+## Handle errors
 
 ```python
 try:
