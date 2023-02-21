@@ -71,9 +71,9 @@ paymongo.PaymentMethod.create({
   'type': 'card',
   'details': {
     'card_number': '5111111111111118',
+    'cvc': '123',
     'exp_month': 3,
     'exp_year': 2025,
-    'cvc': '123'
   },
   'billing': {
     'address': {
