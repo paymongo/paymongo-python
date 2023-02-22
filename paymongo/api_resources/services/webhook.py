@@ -6,6 +6,7 @@ from paymongo import ApiResource
 from paymongo import BaseService
 from paymongo import EventEntity
 from paymongo import SignatureVerificationException
+from paymongo import UnexpectedValueException
 from paymongo import WebhookEntity
 
 class Webhook(BaseService):
@@ -26,12 +27,12 @@ class Webhook(BaseService):
   @classmethod
   def construct_event(all, payload, signature_header, webhook_secret_key):
     if not type(signature_header) == str:
-      raise SignatureVerificationException('The signature must be a string.')
+      raise UnexpectedValueException('The signature must be a string.')
 
     signature_array = signature_header.split(',')
 
     if len(signature_array) < 3:
-      raise SignatureVerificationException(f'The format of signature {signature_header} is invalid.')
+      raise UnexpectedValueException(f'The format of signature {signature_header} is invalid.')
 
     timestamp = signature_array[0].split('=')[1]
     test_mode_signature = signature_array[1].split('=')[1]
