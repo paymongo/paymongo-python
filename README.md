@@ -204,3 +204,24 @@ except paymongo.StandardException as e:
   print(e.errors[0].detail)
   print(e.errors[0].code)
 ```
+
+## Verifying webhook signature
+
+```python
+payload = '{"data":{"id":"evt_...","type":"event","attributes":{"type":"source.chargeable"},"created_at":1675323264}}}'
+signature_header = 't=1675323267,te=,li=99f...'
+webhook_secret_key = 'whsk_...'
+
+try:
+  event = paymongo.Webhook.construct_event(
+    payload=payload,
+    signature_header=signature_header,
+    webhook_secret_key=webhook_secret_key
+  )
+
+  event.id
+  event.type
+  event.resource
+except paymongo.SignatureVerificationException:
+  # Handle invalid signature
+```
