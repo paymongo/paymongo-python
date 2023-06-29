@@ -13,6 +13,7 @@ from paymongo.api_resources.paymongo_client import PaymongoClient
 from paymongo.api_resources.entities.base_entity import BaseEntity
 from paymongo.api_resources.entities.billing_address_entity import BillingAddressEntity
 from paymongo.api_resources.entities.billing_entity import BillingEntity
+from paymongo.api_resources.entities.checkout_session_entity import CheckoutSessionEntity
 from paymongo.api_resources.entities.customer_entity import CustomerEntity
 from paymongo.api_resources.entities.event_entity import EventEntity
 from paymongo.api_resources.entities.line_item_entity import LineItemEntity
