@@ -14,7 +14,6 @@ class PaymentIntentEntity(BaseEntity):
     self.livemode = api_resource.attributes['livemode']
     self.metadata = api_resource.attributes['metadata']
     self.next_action = api_resource.attributes['next_action']
-    self.origin = api_resource.attributes['origin']
     self.payment_method_allowed = api_resource.attributes['payment_method_allowed']
     self.payment_method_options = api_resource.attributes['payment_method_options']
     self.payments = api_resource.attributes['payments']
