@@ -13,7 +13,10 @@ class PaymentIntent(BaseService):
       entity=PaymentIntentEntity,
       method='post',
       path=f'{self.URI}/{id}/attach',
-      payload=payload
+      payload={
+        **payload,
+        'origin': 'python'
+      }
     )
 
   @classmethod
